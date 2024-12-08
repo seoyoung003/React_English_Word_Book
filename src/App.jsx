@@ -7,9 +7,12 @@ const[wordState, setWordState] = useState({
   words : [],
 });
 
+
+
   return(
     <main>
       <WordSidebar words={wordState}/>
+      {content}
     </main>
   );
     
