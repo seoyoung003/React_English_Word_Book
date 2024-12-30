@@ -1,5 +1,8 @@
-import WordSidebar from "./components/WordSidebar"
+import WordSidebar from "./components/WordSidebar";
 import { useState } from "react";
+import SelectedWord from "./components/SelectedWord";
+import NewWord from "./components/NewWord"
+import NoWordSelected from "./components/NoWordSelected";
 
 export default function App() {
 const[wordState, setWordState] = useState({
@@ -53,20 +56,24 @@ function handleAddNewWord(wordData) {
   })
 }
 
-  const selectedProject = wordState.words.find((word) => word.id === wordState.selectedWordId);
+  const selectedWord = wordState.words.find((word) => word.id === wordState.selectedWordId);
 
-  let content = <SelectedWord/>
+  let content;
 
 
   if(wordState.selectedWordId === undefined) {
-    content = <NewWord cancelWord={handleCancelWord} addNewWord = {handleAddNewWord}/>
+    content = <NoWordSelected onStartAddWord={handleAddWord}/>
   } else if (wordState.selectedWordId === null) {
-    content = <NoWordSelected AddWord={handleAddWord}/>
+    content = <NewWord cancelWord={handleCancelWord} addNewWord = {handleAddNewWord}/>
+
+  } else {
+    content = <SelectedWord words={selectedWord}/>
   }
   return(
-    <main>
-      <WordSidebar words={wordState.words}/>
-      {content}
+    <main className="flex h-screen">
+      <WordSidebar onStartAddWord={handleAddWord} words={wordState.words} onSelectWord= {handleSelectWord}/>
+      <div className="flex-1 flex items-center justify-center">{content}</div>
+      
     </main>
   );
     

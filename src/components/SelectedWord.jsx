@@ -1,8 +1,8 @@
-export default function SelecteWord(words) {
-    retur(
+export default function SelectedWord({words}) {
+    return(
         <div>
             <h1>{words.word}</h1>
-            <h3>{words.description}</h3>
+            <h3>{words.meaning}</h3>
         </div>
     )
 }
